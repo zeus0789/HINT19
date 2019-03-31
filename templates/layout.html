@@ -1,0 +1,62 @@
+
+<html>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="{{ url_for('static', filename='mdl/material.min.css') }}">
+<style>
+.demo-card-wide.mdl-card {
+ width: 700px;
+}
+.demo-card-wide > .mdl-card__title {
+  color: #fff;
+  height: 176px;
+  background: url('{{ url_for('static', filename='img/image1.png') }}') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+  color: #fff;
+}
+</style>
+<style>
+.demo-list-two {
+  width: 300px;
+}
+</style>
+<script src="{{ url_for('static', filename='mdl/material.min.js') }}"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<title>Flag News</title>
+
+
+<!-- Simple header with scrollable tabs. -->
+<div style="margin-top:0; position:relative; overflow:hidden" class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+  <header class="mdl-layout__header">
+    <div class="mdl-layout__header-row">
+      <!-- Title -->
+      <span class="mdl-layout-title">FLAG NEWS</span>
+    </div>
+    <!-- Tabs -->
+    <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+      <a href="/" class="mdl-layout__tab is-active">Home</a>
+      <a href="/feed/" class="mdl-layout__tab">Feed</a>
+      {% if session.get("current_user", None) != None %}
+      <a href="/private/" class="mdl-layout__tab">Publish</a>
+      {% endif%}
+      {% if session.get("current_user", None) == "ADMIN" %}
+      <a href="/admin" class="mdl-layout__tab">Admin Dashboard</a>
+      {% endif %}
+      {% if session.get("current_user", None) != None %}
+      <a href="/logout" class="mdl-layout__tab">Logout {{ session.get("current_user") }}</a>
+      {% endif %}
+    </div>
+  </header>
+</div>
+
+
+
+<div class="container">
+
+  <h1>{% block page_title %}{% endblock %}</h1>
+
+  <p>{% block body %}{% endblock %}</p>
+
+</div>
+
+</html>
